@@ -1,0 +1,55 @@
+{% assign data = product.metafields.custom.specifications.value | parse_json %}
+{% if data.size > 0 %}
+<section class="bin-specification-section" id="productspecificaties">
+<div class="bin-container">
+  <h2 class="bin-title-specification">Specificaties</h2>
+  <div class="bin-detail-specification">
+    {% assign middle_point = data.size | divided_by: 2 %}
+    {% for row in data %}
+      {% if forloop.first %}
+        <div class="bin-block-1">
+      {% endif %}
+      <div class="bin-specification-block">
+        {% assign row_data = row | split: '<span>' %}
+        <div class="bin-lbl-1">
+          <span class="bin-lbl-icon"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
+              <g clip-path="url(#clip0_44_866)">
+                <path d="M7.5 0C3.3645 0 0 3.36455 0 7.50005C0 11.6355 3.3645 15 7.5 15C11.6355 15 15 11.6355 15 7.50005C15 3.36455 11.6355 0 7.5 0ZM7.5 13.6364C4.11636 13.6364 1.36364 10.8836 1.36364 7.50005C1.36364 4.11646 4.11636 1.36364 7.5 1.36364C10.8836 1.36364 13.6364 4.11646 13.6364 7.50005C13.6364 10.8836 10.8836 13.6364 7.5 13.6364Z" fill="#74911D"></path>
+                <path d="M7.49985 3.18188C6.99867 3.18188 6.59094 3.58988 6.59094 4.09138C6.59094 4.59243 6.99867 5.00007 7.49985 5.00007C8.00103 5.00007 8.40876 4.59243 8.40876 4.09138C8.40876 3.58988 8.00103 3.18188 7.49985 3.18188Z" fill="#74911D"></path>
+                <path d="M7.50006 6.36353C7.12351 6.36353 6.81824 6.6688 6.81824 7.04534V11.1363C6.81824 11.5128 7.12351 11.8181 7.50006 11.8181C7.8766 11.8181 8.18187 11.5128 8.18187 11.1363V7.04534C8.18187 6.6688 7.8766 6.36353 7.50006 6.36353Z" fill="#74911D"></path>
+              </g>
+              <defs>
+                <clipPath id="clip0_44_866">
+                  <rect width="15" height="15" fill="white"></rect>
+                </clipPath>
+              </defs>
+            </svg>
+          </span>
+          <span class="bin-lbl-text">{{ row_data | first }}</span>
+        </div>
+        <div class="bin-lbl-2">{{ row_data[1] }}</div>
+      </div>
+      {% if forloop.index == middle_point %}
+        </div>
+        <div class="bin-block-2">
+      {% endif %}
+      {% if forloop.last %}
+      </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+</section>
+{% endif %}
+{% schema %}
+  {
+    "name": "durbin pd specification",
+    "settings": [],
+    "presets": [
+      {
+        "name": "durbin pd specification",
+        "category": "codixel"
+      }
+    ]
+  }
+{% endschema %}
